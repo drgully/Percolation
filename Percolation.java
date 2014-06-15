@@ -51,8 +51,7 @@ public class Percolation
             // find surrounding open sites and connect
             if ((grid[i-1][j-1] / N) != 0) // has site above
             {
-                int index = grid[i-2][j-1];
-                if (open[index] == true)
+                if (open[grid[i-2][j-1]])
                 {
                     helper.union(grid[i-1][j-1], grid[i-2][j-1]);
                 }
@@ -63,16 +62,14 @@ public class Percolation
             }
             if ((grid[i-1][j-1] % N) != (N - 1)) // has site to right
             {
-                int index = grid[i-1][j];
-                if (open[index] == true)
+                if (open[grid[i-1][j]])
                 {
                     helper.union(grid[i-1][j-1], grid[i-1][j]);
                 }
             }
             if ((grid[i-1][j-1] / N) != (N - 1)) // has site below
             {
-                int index = grid[i][j-1];
-                if (open[index] == true)
+                if (open[grid[i][j-1]])
                 {
                     helper.union(grid[i-1][j-1], grid[i][j-1]);
                 }
@@ -83,10 +80,9 @@ public class Percolation
             }
             if ((grid[i-1][j-1] % N) != 0) // has site to left
             {
-                int index = grid[i-1][j-2];
-                if (open[index] == true)
+                if (open[grid[i-1][j-2]])
                 {
-                    helper.union(grid[i-1][j-1],grid[i-1][j-2]);
+                    helper.union(grid[i-1][j-1], grid[i-1][j-2]);
                 }
             }
         }

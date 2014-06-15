@@ -23,23 +23,30 @@ public class PercolationStats
     // perform T independent computational experiments on an N-by-N grid
     public PercolationStats(int N, int T)
     {
-        this.T = T;
-        percolated = new double[T];
-        for (int i = 0; i < T; i++)
+        if ((N > 0) && (T > 0))
         {
-            Percolation obj = new Percolation(N);
-            int count = 0;            
-            while (!obj.percolates())
+            this.T = T;
+            percolated = new double[T];
+            for (int i = 0; i < T; i++)
             {
-                int row = StdRandom.uniform(N)+1;
-                int col = StdRandom.uniform(N)+1;
-                if (!obj.isOpen(row, col))
+                Percolation obj = new Percolation(N);
+                int count = 0;            
+                while (!obj.percolates())
                 {
-                    obj.open(row, col);
-                    count++;
+                    int row = StdRandom.uniform(N)+1;
+                    int col = StdRandom.uniform(N)+1;
+                    if (!obj.isOpen(row, col))
+                    {
+                        obj.open(row, col);
+                        count++;
+                    }
                 }
+                percolated[i] = (double) count / (N*N);
             }
-            percolated[i] = (double) count / (N*N);
+        }
+        else
+        {
+            throw new IllegalArgumentException();
         }
     }
     
